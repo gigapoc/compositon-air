@@ -1,0 +1,32 @@
+{
+  "species": [
+    {
+      "id": "N2",
+      "name": "Diazote",
+      "formula": "N₂",
+      "proportionLabel": "~78 %",
+      "body": "L'azote est le gaz le plus abondant dans l'air. Il est inerte : il ne brûle pas. Il dilue l'oxygène et stabilise l'atmosphère que nous respirons."
+    },
+    {
+      "id": "O2",
+      "name": "Dioxygène",
+      "formula": "O₂",
+      "proportionLabel": "~21 %",
+      "body": "L'oxygène est indispensable à la respiration et à la combustion. Il est minoritaire par rapport à l'azote, mais vital pour les êtres vivants."
+    },
+    {
+      "id": "Ar",
+      "name": "Argon",
+      "formula": "Ar",
+      "proportionLabel": "~1 %",
+      "body": "L'argon est un gaz noble, présent en faible quantité dans l'air. C'est un atome seul. Les petites boules bleu clair le représentent dans la scène."
+    },
+    {
+      "id": "CO2",
+      "name": "Dioxyde de carbone",
+      "formula": "CO₂",
+      "proportionLabel": "~0,04 %",
+      "body": "Le dioxyde de carbone est un gaz trace dans l'air. Sa proportion réelle est très faible (~0,04 %). On en place au moins une molécule dans chaque zone pour que tu puisses la trouver ; la scène montre plus de CO₂ que la réalité, mais cette fiche indique la vraie proportion."
+    }
+  ]
+}

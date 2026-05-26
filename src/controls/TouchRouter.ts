@@ -1,4 +1,5 @@
 import { DRAG_THRESHOLD_PX } from '../config/scene.constants.ts';
+import { getUiState } from '../app/uiState.ts';
 
 import type { VirtualJoystick } from '../ui/VirtualJoystick.ts';
 
@@ -62,7 +63,7 @@ export class TouchRouter {
   }
 
   private onPointerDown = (event: PointerEvent): void => {
-    if (event.button !== 0) return;
+    if (event.button !== 0 || getUiState() !== 'exploring') return;
     this.element.setPointerCapture(event.pointerId);
     const zone = this.getZone(event.clientX);
     this.pointers.set(event.pointerId, {
@@ -80,6 +81,7 @@ export class TouchRouter {
   };
 
   private onPointerMove = (event: PointerEvent): void => {
+    if (getUiState() !== 'exploring') return;
     const active = this.pointers.get(event.pointerId);
     if (!active) return;
 
@@ -107,7 +109,7 @@ export class TouchRouter {
     const active = this.pointers.get(event.pointerId);
     if (!active) return;
 
-    if (!active.isDrag && this.onTap) {
+    if (!active.isDrag && getUiState() === 'exploring' && this.onTap) {
       this.onTap(event.clientX, event.clientY);
     }
 

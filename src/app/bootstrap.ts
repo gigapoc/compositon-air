@@ -1,7 +1,13 @@
 import { FirstPersonController } from '../controls/FirstPersonController.ts';
 import { TouchRouter } from '../controls/TouchRouter.ts';
+import { loadParticleContent } from '../content/loadParticleContent.ts';
+import { ParticlePicker } from '../interaction/ParticlePicker.ts';
 import { SceneManager } from '../scene/SceneManager.ts';
+import { Legend } from '../ui/Legend.ts';
+import { ParticleSheet } from '../ui/ParticleSheet.ts';
 import { VirtualJoystick } from '../ui/VirtualJoystick.ts';
+import { DRAG_THRESHOLD_PX } from '../config/scene.constants.ts';
+import { getUiState } from './uiState.ts';
 import '../ui/styles.css';
 
 const WEBGL_ERROR_MESSAGE =
@@ -52,6 +58,8 @@ export function bootstrap(): void {
     return;
   }
 
+  const particleContent = loadParticleContent();
+
   let sceneManager: SceneManager | null = null;
 
   try {
@@ -64,25 +72,51 @@ export function bootstrap(): void {
 
   hideLoading(loadingEl);
 
+  new Legend(app);
+  const sheet = new ParticleSheet(app, particleContent);
+  const picker = new ParticlePicker(
+    sceneManager.camera,
+    sceneManager.particleField,
+    sceneManager.renderer.domElement,
+  );
+
   const joystick = new VirtualJoystick(app);
   const controller = new FirstPersonController(sceneManager.camera);
   controller.setJoystickProvider(() => joystick.getOutput());
+
+  const handlePick = (clientX: number, clientY: number): void => {
+    if (getUiState() !== 'exploring' || sheet.isOpen()) return;
+    picker.pick(clientX, clientY);
+  };
 
   const touchRouter = new TouchRouter(sceneManager.renderer.domElement);
   touchRouter.setJoystick(joystick);
   touchRouter.setLookDragHandler(({ deltaX, deltaY }) => {
     controller.handleLookDrag(deltaX, deltaY);
   });
-  touchRouter.setTapHandler(() => {
-    /* Réservé Epic 3 — sélection particule */
+  touchRouter.setTapHandler((clientX, clientY) => {
+    handlePick(clientX, clientY);
   });
 
   const canvas = sceneManager.renderer.domElement;
+  let mouseDown: { x: number; y: number } | null = null;
+
   canvas.addEventListener('mousedown', (event) => {
     controller.handleMouseDown(event.button, event.clientX);
+    if (event.button === 0 && getUiState() === 'exploring') {
+      mouseDown = { x: event.clientX, y: event.clientY };
+    }
   });
-  window.addEventListener('mouseup', () => {
+  window.addEventListener('mouseup', (event) => {
     controller.handleMouseUp();
+    if (mouseDown && event.button === 0 && getUiState() === 'exploring') {
+      const dx = event.clientX - mouseDown.x;
+      const dy = event.clientY - mouseDown.y;
+      if (Math.hypot(dx, dy) < DRAG_THRESHOLD_PX) {
+        handlePick(event.clientX, event.clientY);
+      }
+    }
+    mouseDown = null;
   });
   window.addEventListener('mousemove', (event) => {
     controller.handleMouseMove(event.movementX, event.movementY);

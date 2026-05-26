@@ -72,7 +72,7 @@ export function bootstrap(): void {
 
   hideLoading(loadingEl);
 
-  new Legend(app);
+  new Legend(app, particleContent);
   const sheet = new ParticleSheet(app, particleContent);
   const picker = new ParticlePicker(
     sceneManager.camera,

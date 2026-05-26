@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="description" content="Composition de l'air — expérience 3D immersive pour le collège" />
+    <title>Composition de l'air — App Educ Morgane</title>
+  </head>
+  <body>
+    <div id="app">
+      <div id="loading" class="loading" aria-live="polite" aria-busy="true">
+        <div class="loading__spinner" role="status" aria-label="Chargement de la scène 3D"></div>
+        <p class="loading__text">Chargement de la scène…</p>
+      </div>
+      <div id="webgl-error" class="webgl-error" hidden role="alert">
+        <h1>WebGL indisponible</h1>
+        <p>
+          Votre navigateur ou appareil ne peut pas afficher la scène 3D.
+          Essayez Chrome ou Safari sur une tablette récente, ou mettez à jour votre navigateur.
+        </p>
+      </div>
+      <div id="canvas-container" class="canvas-container"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

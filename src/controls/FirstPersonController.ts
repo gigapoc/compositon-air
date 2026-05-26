@@ -20,8 +20,8 @@ export class FirstPersonController {
 
   constructor(camera: THREE.PerspectiveCamera) {
     this.camera = camera;
-    this.yaw = Math.PI;
-    this.pitch = 0;
+    this.yaw = camera.rotation.y;
+    this.pitch = camera.rotation.x;
     this.syncCameraRotation();
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);

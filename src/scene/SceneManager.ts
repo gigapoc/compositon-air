@@ -1,6 +1,6 @@
 import * as THREE from 'three';
 import {
-  CAMERA_HEIGHT,
+  CAMERA_INITIAL_LOOK_AT,
   CAMERA_INITIAL_POSITION,
   MAX_DEVICE_PIXEL_RATIO,
   SCENE_HALF,
@@ -30,7 +30,11 @@ export class SceneManager {
       CAMERA_INITIAL_POSITION.y,
       CAMERA_INITIAL_POSITION.z,
     );
-    this.camera.lookAt(0, CAMERA_HEIGHT, 0);
+    this.camera.lookAt(
+      CAMERA_INITIAL_LOOK_AT.x,
+      CAMERA_INITIAL_LOOK_AT.y,
+      CAMERA_INITIAL_LOOK_AT.z,
+    );
 
     this.renderer = new THREE.WebGLRenderer({
       antialias: true,

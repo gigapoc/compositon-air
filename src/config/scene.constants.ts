@@ -22,12 +22,18 @@ export const COLOR_CO2_O = 0xdc2626;
 export const MAX_DEVICE_PIXEL_RATIO = 2;
 
 export const CAMERA_HEIGHT = 1.6;
-export const CAMERA_INITIAL_POSITION = { x: 0, y: CAMERA_HEIGHT, z: 8 } as const;
+export const CAMERA_BOUND_MARGIN = 0.5;
+/** Centre de la face +Z (dos à la paroi), regard vers le milieu du volume à hauteur yeux. */
+export const CAMERA_INITIAL_LOOK_AT = { x: 0, y: CAMERA_HEIGHT, z: 0 } as const;
+export const CAMERA_INITIAL_POSITION = {
+  x: 0,
+  y: CAMERA_HEIGHT,
+  z: SCENE_HALF - CAMERA_BOUND_MARGIN,
+} as const;
 
 export const MOVE_SPEED = 8;
 export const LOOK_SENSITIVITY = 0.002;
 export const PITCH_CLAMP_RAD = (80 * Math.PI) / 180;
-export const CAMERA_BOUND_MARGIN = 0.5;
 export const DRAG_THRESHOLD_PX = 8;
 
 export const PARTICLE_MIN_DISTANCE = 0.8;

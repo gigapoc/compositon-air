@@ -65,8 +65,8 @@ export class FirstPersonController {
     if (this.keys.has('KeyA') || this.keys.has('ArrowLeft')) move.sub(right);
 
     const joystick = this.getJoystick?.() ?? { x: 0, y: 0 };
-    move.addScaledVector(forward, joystick.y);
-    move.addScaledVector(right, joystick.x);
+    move.addScaledVector(forward, -joystick.y);
+    move.addScaledVector(right, -joystick.x);
 
     if (move.lengthSq() > 0) {
       move.normalize().multiplyScalar(MOVE_SPEED * delta);

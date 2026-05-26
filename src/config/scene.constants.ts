@@ -21,6 +21,9 @@ export const COLOR_CO2_O = 0xdc2626;
 
 export const MAX_DEVICE_PIXEL_RATIO = 2;
 
+/** Fond WebGL — bleu horizon doux (moins vert que le teal précédent). */
+export const SCENE_BACKGROUND_COLOR = 0x2a4668;
+
 export const CAMERA_HEIGHT = 1.6;
 export const CAMERA_BOUND_MARGIN = 0.5;
 /** Centre de la face +Z (dos à la paroi), regard vers le milieu du volume à hauteur yeux. */

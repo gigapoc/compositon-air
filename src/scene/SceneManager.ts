@@ -3,6 +3,7 @@ import {
   CAMERA_INITIAL_LOOK_AT,
   CAMERA_INITIAL_POSITION,
   MAX_DEVICE_PIXEL_RATIO,
+  SCENE_BACKGROUND_COLOR,
   SCENE_HALF,
   SCENE_SIZE,
   ZONE_GRID_SIZE,
@@ -17,7 +18,7 @@ export class SceneManager {
 
   constructor(container: HTMLElement) {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x0a1628);
+    this.scene.background = new THREE.Color(SCENE_BACKGROUND_COLOR);
 
     this.camera = new THREE.PerspectiveCamera(
       60,

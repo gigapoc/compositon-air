@@ -1,4 +1,8 @@
+import { FirstPersonController } from '../controls/FirstPersonController.ts';
+import { TouchRouter } from '../controls/TouchRouter.ts';
 import { SceneManager } from '../scene/SceneManager.ts';
+import { VirtualJoystick } from '../ui/VirtualJoystick.ts';
+import '../ui/styles.css';
 
 const WEBGL_ERROR_MESSAGE =
   'Votre navigateur ou appareil ne peut pas afficher la scène 3D. ' +
@@ -33,11 +37,12 @@ function isWebGlAvailable(): boolean {
 }
 
 export function bootstrap(): void {
+  const app = document.getElementById('app');
   const container = document.getElementById('canvas-container');
   const loadingEl = document.getElementById('loading');
   const errorEl = document.getElementById('webgl-error');
 
-  if (!container || !loadingEl || !errorEl) {
+  if (!app || !container || !loadingEl || !errorEl) {
     console.error('Éléments DOM requis introuvables.');
     return;
   }
@@ -59,13 +64,43 @@ export function bootstrap(): void {
 
   hideLoading(loadingEl);
 
+  const joystick = new VirtualJoystick(app);
+  const controller = new FirstPersonController(sceneManager.camera);
+  controller.setJoystickProvider(() => joystick.getOutput());
+
+  const touchRouter = new TouchRouter(sceneManager.renderer.domElement);
+  touchRouter.setJoystick(joystick);
+  touchRouter.setLookDragHandler(({ deltaX, deltaY }) => {
+    controller.handleLookDrag(deltaX, deltaY);
+  });
+  touchRouter.setTapHandler(() => {
+    /* Réservé Epic 3 — sélection particule */
+  });
+
+  const canvas = sceneManager.renderer.domElement;
+  canvas.addEventListener('mousedown', (event) => {
+    controller.handleMouseDown(event.button, event.clientX);
+  });
+  window.addEventListener('mouseup', () => {
+    controller.handleMouseUp();
+  });
+  window.addEventListener('mousemove', (event) => {
+    controller.handleMouseMove(event.movementX, event.movementY);
+  });
+
   const onResize = (): void => {
     sceneManager?.resize();
   };
 
   window.addEventListener('resize', onResize);
 
-  const animate = (): void => {
+  let lastTime = performance.now();
+
+  const animate = (now: number): void => {
+    const delta = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+    controller.update(delta);
+    sceneManager?.update(delta);
     sceneManager?.render();
     requestAnimationFrame(animate);
   };

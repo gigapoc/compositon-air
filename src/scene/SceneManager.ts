@@ -7,11 +7,13 @@ import {
   SCENE_SIZE,
   ZONE_GRID_SIZE,
 } from '../config/scene.constants.ts';
+import { ParticleField } from './ParticleField.ts';
 
 export class SceneManager {
   readonly scene: THREE.Scene;
   readonly camera: THREE.PerspectiveCamera;
   readonly renderer: THREE.WebGLRenderer;
+  readonly particleField: ParticleField;
 
   constructor(container: HTMLElement) {
     this.scene = new THREE.Scene();
@@ -40,8 +42,11 @@ export class SceneManager {
     this.renderer.setSize(window.innerWidth, window.innerHeight);
     container.appendChild(this.renderer.domElement);
 
+    this.particleField = new ParticleField();
+
     this.setupLights();
     this.setupVolume();
+    this.particleField.init(this.scene);
   }
 
   private setupLights(): void {
@@ -78,6 +83,10 @@ export class SceneManager {
     this.scene.add(grid);
   }
 
+  update(delta: number): void {
+    this.particleField.update(delta);
+  }
+
   resize(): void {
     const { innerWidth, innerHeight } = window;
     this.camera.aspect = innerWidth / innerHeight;
@@ -93,6 +102,7 @@ export class SceneManager {
   }
 
   dispose(): void {
+    this.particleField.dispose();
     this.renderer.dispose();
     this.renderer.domElement.remove();
   }

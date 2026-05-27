@@ -79,4 +79,4 @@ Déployée automatiquement via GitHub Actions à chaque push sur `main` (après 
 
 ## Licence
 
-Usage pédagogique — projet App Educ Morgane.
+Usage pédagogique — projet App Educ.

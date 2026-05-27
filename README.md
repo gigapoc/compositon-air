@@ -1,4 +1,4 @@
-# App Educ Morgane — Composition de l'air 3D
+# App Educ — Composition de l'air 3D
 
 Application web 3D immersive pour explorer la composition de l'air au collège. Ouverture directe via URL, sans compte ni installation.
 

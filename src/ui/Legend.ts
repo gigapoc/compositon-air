@@ -14,10 +14,10 @@ interface LegendVisual {
 }
 
 const LEGEND_VISUALS: Record<SpeciesId, LegendVisual> = {
-  N2: { shape: 'Deux sphères fusionnées', colors: [COLOR_N2] },
-  O2: { shape: 'Deux sphères fusionnées', colors: [COLOR_O2] },
-  Ar: { shape: 'Petite sphère isolée', colors: [COLOR_AR] },
-  CO2: { shape: 'C + 2 O alignés', colors: [COLOR_CO2_C, COLOR_CO2_O] },
+  N2: { shape: '', colors: [COLOR_N2] },
+  O2: { shape: '', colors: [COLOR_O2] },
+  Ar: { shape: '', colors: [COLOR_AR] },
+  CO2: { shape: '', colors: [COLOR_CO2_C, COLOR_CO2_O] },
 };
 
 function hexColor(value: number): string {
@@ -68,7 +68,7 @@ export class Legend {
         const swatch = document.createElement('span');
         swatch.className = 'legend__swatch';
         swatch.style.backgroundColor = hexColor(color);
-        swatches.appendChild(swatch);
+        // swatches.appendChild(swatch);
       }
 
       const text = document.createElement('span');

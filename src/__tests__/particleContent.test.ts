@@ -11,6 +11,8 @@ describe('validateParticlesContent', () => {
     const content = validateParticlesContent(rawContent);
     expect(content.species).toHaveLength(4);
     expect(content.species.map((s) => s.id)).toEqual([...SPECIES_IDS]);
+    expect(content.airComposition.title).toBe('Description');
+    expect(content.airComposition.paragraphs).toHaveLength(2);
   });
 
   it('rejette un contenu sans les 4 espèces', () => {

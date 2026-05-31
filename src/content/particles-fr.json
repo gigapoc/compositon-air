@@ -19,14 +19,21 @@
       "name": "Argon",
       "formula": "Ar",
       "proportionLabel": "~1 %",
-      "body": "L'argon est un gaz noble, présent en faible quantité dans l'air. C'est un atome seul. Les petites boules bleu clair le représentent dans la scène."
+      "body": "L'argon est un gaz noble, présent en faible quantité dans l'air. C'est un atome seul."
     },
     {
       "id": "CO2",
       "name": "Dioxyde de carbone",
       "formula": "CO₂",
       "proportionLabel": "~0,04 %",
-      "body": "Le dioxyde de carbone est un gaz trace dans l'air. Sa proportion réelle est très faible (~0,04 %). On en place au moins une molécule dans chaque zone pour que tu puisses la trouver ; la scène montre plus de CO₂ que la réalité, mais cette fiche indique la vraie proportion."
+      "body": "Le dioxyde de carbone est un gaz de l'air. Sa proportion réelle est très faible (~0,04 %)."
     }
-  ]
+  ],
+  "airComposition": {
+    "title": "Description",
+    "paragraphs": [
+      "L'air est un mélange de gaz qui entoure la Terre. Les principaux composants de l'air sont l'azote (78 %) et l'oxygène (21 %), tandis que le 1 % restant est constitué de gaz à l'état de traces tels que l'argon, le dioxyde de carbone, le néon, l'hélium, le méthane et l'hydrogène.",
+      "En outre, l'air contient également des quantités variables de vapeur d'eau et de particules en suspension, telles que la poussière, le pollen et les polluants."
+    ]
+  }
 }

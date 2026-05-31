@@ -3,6 +3,7 @@ import { TouchRouter } from '../controls/TouchRouter.ts';
 import { loadParticleContent } from '../content/loadParticleContent.ts';
 import { ParticlePicker } from '../interaction/ParticlePicker.ts';
 import { SceneManager } from '../scene/SceneManager.ts';
+import { AirComposition } from '../ui/AirComposition.ts';
 import { Legend } from '../ui/Legend.ts';
 import { ParticleSheet } from '../ui/ParticleSheet.ts';
 import { VirtualJoystick } from '../ui/VirtualJoystick.ts';
@@ -72,7 +73,12 @@ export function bootstrap(): void {
 
   hideLoading(loadingEl);
 
-  new Legend(app, particleContent);
+  const sidePanels = document.createElement('div');
+  sidePanels.className = 'side-panels';
+  app.appendChild(sidePanels);
+
+  new AirComposition(app, particleContent.airComposition);
+  new Legend(sidePanels, particleContent);
   const sheet = new ParticleSheet(app, particleContent);
   const picker = new ParticlePicker(
     sceneManager.camera,
